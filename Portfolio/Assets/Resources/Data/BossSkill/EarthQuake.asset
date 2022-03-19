@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9710b4d94aad54cb902f830ac27e94, type: 3}
+  m_Name: EarthQuake
+  m_EditorClassIdentifier: 
+  skillCode: -1
+  skillName: 
+  skillDesc: 
+  ManaCost: 0
+  damage: 100
+  coolingTime: 25
+  damageIncreaseRate: 0
+  coolingTimeDecrease: 0
+  skillImage: {fileID: 0}
+  skillPrefab: {fileID: 7391388830300980139, guid: d59ca19f1e075914a89eab7eebb59bf6,
+    type: 3}
+  skillSound: {fileID: 8300000, guid: d5490ed4f5111a345a55559328deb358, type: 3}

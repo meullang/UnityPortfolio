@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9710b4d94aad54cb902f830ac27e94, type: 3}
+  m_Name: BladeStorm
+  m_EditorClassIdentifier: 
+  skillCode: 1
+  skillName: "\uD68C\uCD95"
+  skillDesc: "\uC791\uC740 \uCE7C\uB0A0 \uD68C\uC624\uB9AC\uB97C \uBAB8 \uC8FC\uC704\uC5D0
+    \uB450\uB985\uB2C8\uB2E4.  "
+  ManaCost: 10
+  damage: 10
+  coolingTime: 7
+  damageIncreaseRate: 10
+  coolingTimeDecrease: 0
+  skillImage: {fileID: 21300000, guid: 03e6f50b7a998ed46a4c3f9f8cb0855e, type: 3}
+  skillPrefab: {fileID: 7714023068124297499, guid: d63630c5745e87b4291371c72f375f22,
+    type: 3}
+  skillSound: {fileID: 8300000, guid: 905528b1749a3df48b0e9d9e3c990d66, type: 3}

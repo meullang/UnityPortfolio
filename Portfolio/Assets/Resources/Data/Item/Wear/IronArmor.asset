@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241c7d29e7179754cb963f2ff0e7291b, type: 3}
+  m_Name: IronArmor
+  m_EditorClassIdentifier: 
+  itemCode: 8
+  itemName: IronArmor
+  itemDesc: "20\uC758 \uBC29\uC5B4\uB825\uC744 \uC8FC\uB294 \uB2E8\uB2E8\uD55C \uCCA0
+    \uAC11\uC637"
+  itemType: 1
+  weaponCode: 0
+  itemImage: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
+  itemPrefab: {fileID: 3760632789398325073, guid: 0f14ad219c92fb44b9f66286e68b7ab5,
+    type: 3}
+  attack: 0
+  defence: 20
+  giveHp: 0
+  giveMp: 0
+  giveSp: 0
+  buyCost: 200
+  sellCost: 100

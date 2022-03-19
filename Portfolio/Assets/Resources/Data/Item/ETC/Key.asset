@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241c7d29e7179754cb963f2ff0e7291b, type: 3}
+  m_Name: Key
+  m_EditorClassIdentifier: 
+  itemCode: 6
+  itemName: Key
+  itemDesc: "\uB9F5 \uC8FC\uBCC0\uC5D0\uC11C \uBCF4\uBB3C\uC0C1\uC790\uB97C \uCC3E\uC544\uBCF4\uC138\uC694"
+  itemType: 6
+  weaponCode: 0
+  itemImage: {fileID: 21300000, guid: a6c10312421cb5e438d8b9edaad2db28, type: 3}
+  itemPrefab: {fileID: 1061117551868062, guid: 1e6e33b293a95ca47935d543e7bca6c4, type: 3}
+  attack: 0
+  defence: 0
+  giveHp: 0
+  giveMp: 0
+  giveSp: 0
+  buyCost: 0
+  sellCost: 0

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241c7d29e7179754cb963f2ff0e7291b, type: 3}
+  m_Name: OrcMeat
+  m_EditorClassIdentifier: 
+  itemCode: 4
+  itemName: "\uC624\uD06C \uACE0"
+  itemDesc: "\uC8FD\uC740 \uC624\uD06C\uC5D0\uAC8C\uC11C \uC5BB\uC740 \uACE0\uAE30"
+  itemType: 5
+  weaponCode: 0
+  itemImage: {fileID: 21300000, guid: d44f6865f42ca39448500daef88c4c16, type: 3}
+  itemPrefab: {fileID: 111752634126463131, guid: 4369944723eade540a133a0bde44a514,
+    type: 3}
+  attack: 0
+  defence: 0
+  giveHp: 0
+  giveMp: 0
+  giveSp: 0
+  buyCost: 20
+  sellCost: 7

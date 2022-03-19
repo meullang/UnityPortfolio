@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241c7d29e7179754cb963f2ff0e7291b, type: 3}
+  m_Name: LeatherArmor
+  m_EditorClassIdentifier: 
+  itemCode: 7
+  itemName: LeatherArmor
+  itemDesc: "\uB098\uC058\uC9C0 \uC54A\uC740 \uAC00\uC8FD \uAC11\uC637\uC73C\uB85C
+    10\uC758 \uBC29\uC5B4\uB825\uAC00\uC9C0\uACE0 \uC788\uB2E4"
+  itemType: 1
+  weaponCode: 0
+  itemImage: {fileID: 21300000, guid: e37ee0b1cbe20c5458102626b95a6b7c, type: 3}
+  itemPrefab: {fileID: 3760632789398325073, guid: 0f14ad219c92fb44b9f66286e68b7ab5,
+    type: 3}
+  attack: 0
+  defence: 10
+  giveHp: 0
+  giveMp: 0
+  giveSp: 0
+  buyCost: 100
+  sellCost: 50

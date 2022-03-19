@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9710b4d94aad54cb902f830ac27e94, type: 3}
+  m_Name: SkeletonSkill
+  m_EditorClassIdentifier: 
+  skillCode: -1
+  skillName: "\uBD88\uC0AC\uC758 \uBD84\uB178"
+  skillDesc: 
+  ManaCost: 0
+  damage: 0
+  coolingTime: 0
+  damageIncreaseRate: 0
+  coolingTimeDecrease: 0
+  skillImage: {fileID: 0}
+  skillPrefab: {fileID: 7972566283181620529, guid: bbd47cbfb53965845a8229604808d667,
+    type: 3}
+  skillSound: {fileID: 8300000, guid: 3bbf6bda525588747ae25d3ae9df630a, type: 3}

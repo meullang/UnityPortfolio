@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9710b4d94aad54cb902f830ac27e94, type: 3}
+  m_Name: Explosion
+  m_EditorClassIdentifier: 
+  skillCode: 0
+  skillName: "\uD50C\uB77C\uC988\uB9C8 \uD3ED\uBC1C"
+  skillDesc: "\uD3ED\uBC1C\uC744 \uC77C\uC73C\uCF1C \uBC94\uC704 \uB370\uBBF8\uC9C0\uB97C
+    \uC90D\uB2C8\uB2E4.  "
+  ManaCost: 10
+  damage: 40
+  coolingTime: 15
+  damageIncreaseRate: 20
+  coolingTimeDecrease: 1
+  skillImage: {fileID: 21300000, guid: 2456dd2824f5ec540830760922f5bac6, type: 3}
+  skillPrefab: {fileID: 7759574122950795536, guid: 676a64a67de390d4192a3301db274ea1,
+    type: 3}
+  skillSound: {fileID: 8300000, guid: 5ec3ad571ff9137499b0b985abaa0d2f, type: 3}

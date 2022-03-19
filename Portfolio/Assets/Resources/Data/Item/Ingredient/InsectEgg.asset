@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241c7d29e7179754cb963f2ff0e7291b, type: 3}
+  m_Name: InsectEgg
+  m_EditorClassIdentifier: 
+  itemCode: 5
+  itemName: "\uACE4\uCDA9\uC758 \uC54C"
+  itemDesc: "\uACE4\uCDA9 \uBAAC\uC2A4\uD130 \uBC30\uC18D\uC5D0 \uC788\uB358 \uC54C\uC774\uB2E4"
+  itemType: 5
+  weaponCode: 0
+  itemImage: {fileID: 21300000, guid: d62fc87d7e2c1d740b3afc4193abf641, type: 3}
+  itemPrefab: {fileID: 649413553183018545, guid: f73e413ea6f3f544abdb381a8e559fdd,
+    type: 3}
+  attack: 0
+  defence: 0
+  giveHp: 0
+  giveMp: 0
+  giveSp: 0
+  buyCost: 30
+  sellCost: 10
