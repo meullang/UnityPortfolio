@@ -741,10 +741,12 @@ MonoBehaviour:
   _targetTr: {fileID: 0}
   shortDis: 0
   _state: 2
+  ScreenEffect: {fileID: 0}
+  lt: {fileID: 0}
   traceDist: 10
   attackDist: 2
-  skillCheck: 0
-  skillDuration: 20
+  _skillCheck: 0
+  _skillDuration: 20
 --- !u!114 &-4017638016220340542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,11 +766,9 @@ MonoBehaviour:
   _maxMp: 0
   _attack: 0
   _defence: 0
-  _speed: 0
   _isDead: 0
   _addAttack: 0
   _addDefnece: 0
-  _gold: 0
   _exp: 0
 --- !u!114 &-8528990136710054413
 MonoBehaviour:

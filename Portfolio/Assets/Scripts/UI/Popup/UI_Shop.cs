@@ -26,7 +26,6 @@ public class UI_Shop : UI_Popup
         Bind<GameObject>(typeof(GameObjects));
 
         _action = GameObject.FindGameObjectWithTag("PLAYER").GetComponent<ActionController>();
-        _action._Shop = this;
 
         GameObject gridPanel = Get<GameObject>((int)GameObjects.GridPanel);
         slots = gridPanel.transform.GetComponentsInChildren<UI_ShopSlot>();

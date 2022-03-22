@@ -265,9 +265,11 @@ MonoBehaviour:
   _targetTr: {fileID: 0}
   shortDis: 0
   _state: 2
+  ScreenEffect: {fileID: 0}
+  lt: {fileID: 0}
   traceDist: 20
   attackDist: 2
-  skillDist: 10
+  _skillDist: 10
 --- !u!114 &-679992486006000912
 MonoBehaviour:
   m_ObjectHideFlags: 0

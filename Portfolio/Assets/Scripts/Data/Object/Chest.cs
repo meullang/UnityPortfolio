@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    private Animator anim;
-    public Item _item;
+    private Animator _anim;
+    [SerializeField]
+    private Item _item;
 
-    private bool check = false;
+    private bool _isOpen = false;
 
     private void Start()
     {
-        anim = gameObject.GetComponent<Animator>();
+        _anim = gameObject.GetComponent<Animator>();
     }
 
     public void OnActive()
     {
-        if (check == false)
+        if (_isOpen == false)
         {
-            anim.SetTrigger("IsOpen");
+            _anim.SetTrigger("IsOpen");
             StartCoroutine(GetItem());
-            check = true;
+
+            Managers.Sound.Play("OutWorld/Boxopen");
+            _isOpen = true;
         }
     }
 

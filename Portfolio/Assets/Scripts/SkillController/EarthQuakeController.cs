@@ -10,7 +10,7 @@ public class EarthQuakeController : MonoBehaviour
     private void OnEnable()
     {
         transform.localScale = new Vector3(1, 1, 1);
-        StartCoroutine(DisableCollider());
+        //StartCoroutine(DisableCollider());
     }
 
     private void Update()
@@ -24,6 +24,5 @@ public class EarthQuakeController : MonoBehaviour
     IEnumerator DisableCollider()
     {
         yield return new WaitForSeconds(1.8f);
-        gameObject.SetActive(false);
     }
 }

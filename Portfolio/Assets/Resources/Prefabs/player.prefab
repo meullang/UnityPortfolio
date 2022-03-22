@@ -3575,9 +3575,9 @@ MonoBehaviour:
   _stat: {fileID: 0}
   _state: 2
   isRun: 0
-  moveSpeed: 5
-  turnSpeed: 0.1
+  _moveSpeed: 5
   isStop: 0
+  PlayerWeaponCode: 0
   PlayerWeapon: {fileID: 7392299495532488712}
   PlayerWeaponList:
   - {fileID: 7392299495532488712}
@@ -3588,9 +3588,9 @@ MonoBehaviour:
   - {fileID: 9100000, guid: c88e1737ba70ff142a89db041f5b9ffe, type: 2}
   - {fileID: 9100000, guid: f8f9edebafcb91841b4d5d055007540c, type: 2}
   ScreenEffect: {fileID: 0}
-  gravity: 20
-  FoundObjects: []
-  enemy: {fileID: 0}
+  _gravity: 20
+  _FoundObjects: []
+  _enemy: {fileID: 0}
   shortDis: 0
 --- !u!114 &1107286896
 MonoBehaviour:
@@ -3633,7 +3633,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Inven: {fileID: 0}
-  _Shop: {fileID: 0}
   _Info: {fileID: 0}
   _talk: {fileID: 0}
   _toolTip: {fileID: 0}

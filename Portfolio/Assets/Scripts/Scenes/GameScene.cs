@@ -9,6 +9,7 @@ public class GameScene : BaseScene
 
     GameObject player;
     GameObject boss;
+    GameObject cam;
 
     protected override void Init()
     {
@@ -24,6 +25,8 @@ public class GameScene : BaseScene
         Dictionary<int, Data.Stat> monsterDict = Managers.Data.MonsterStatDict;
 
         player = Managers.Game.Spawn(Define.WorldObject.Player, "player");
+
+
         Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player.transform);
         Managers.Game.playerAlive = true;
 
@@ -48,8 +51,8 @@ public class GameScene : BaseScene
         }
         
         StartCoroutine(Managers.Skill.cooling());
-        Managers.Quest.SetFirstQuest();
 
+        //Managers.Quest.SetFirstQuest();
 
         Managers.Sound.Play("Sounds/Bgm/FarmDay", Define.Sound.Bgm);
     }
@@ -82,17 +85,17 @@ public class GameScene : BaseScene
 
         Managers.Quest.Clear();
         Managers.Skill.Clear();
+        StopAllCoroutines();
     }
 
     public IEnumerator releaseBlock()
     {
         player.GetComponent<PlayerController>().isStop = true;
-        Camera.main.gameObject.GetOrAddComponent<CameraController>().isStop = true;
-        player.GetComponent<ActionController>().enabled = false;
+        Camera.main.gameObject.GetComponent<CameraController>().isStop = true;
         yield return new WaitForSeconds(3f);
-        player.GetComponent<PlayerController>().enabled = true;
         player.GetComponent<PlayerController>().isStop = false;
-        Camera.main.gameObject.GetOrAddComponent<CameraController>().isStop = false;
-        player.GetComponent<ActionController>().enabled = true;
+        Camera.main.GetComponent<CameraController>().isStop = false;
+
+        Managers.Quest.SetFirstQuest();
     }
 }

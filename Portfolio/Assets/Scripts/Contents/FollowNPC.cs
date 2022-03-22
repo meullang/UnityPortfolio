@@ -20,12 +20,12 @@ public class FollowNPC : MonoBehaviour
     private Define.State _state = Define.State.Idle;
 
     [SerializeField]
-    private float distance;
+    private float _distance;
     private const float _stopDist = 3.0f;
 
     private bool _isDie = false;
 
-    private bool _ishitted = false;
+    private bool _isHitted = false;
     private float _hittedTime = 1.5f;
 
     GameObject _hpBar;
@@ -34,9 +34,11 @@ public class FollowNPC : MonoBehaviour
     {
         Init();
 
+        //캐싱
         _stat = GetComponent<Stat>();
         _anim = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
+
         _agent.updateRotation = false;
         _agent.destination = _targetTr.position;
         _agent.isStopped = true;
@@ -45,6 +47,7 @@ public class FollowNPC : MonoBehaviour
     private void Start()
     {
         _agent.isStopped = true;
+
         _stat.MaxHp = 100;
         _stat.Hp = 100;
     }
@@ -67,14 +70,15 @@ public class FollowNPC : MonoBehaviour
 
     public void StartQuest()
     {
-        Debug.Log("started");
         _anim.SetTrigger(hashStart);
-        this.gameObject.tag = "PLAYER";
+
+        this.gameObject.tag = "PLAYER";  //플레이어로 변경하여 공격 대상이 되도록 함
+
         StartCoroutine(CheckNPCState());
         StartCoroutine(NPCAction());
     }
 
-    public void FailQuest()
+    public void FailQuest() // 캐릭터가 죽을 경우 캐릭을 멈추고 퀘스트를 처음으로 초기화
     {
         StopAllCoroutines();
         Managers.Quest.questActionIndex = 0;
@@ -103,7 +107,7 @@ public class FollowNPC : MonoBehaviour
 
             if (_state == Define.State.Die) yield break;
 
-            distance = Vector3.Distance(_targetTr.position, transform.position);
+            _distance = Vector3.Distance(_targetTr.position, transform.position);
 
             _state = ChangeState();
         }
@@ -111,11 +115,11 @@ public class FollowNPC : MonoBehaviour
 
     protected Define.State ChangeState()
     {
-        if (_ishitted == true)
+        if (_isHitted == true)
         {
             return Define.State.Hit;
         }
-        else if (distance <= _stopDist)
+        else if (_distance <= _stopDist)
         {
             return Define.State.Idle;
         }
@@ -146,7 +150,7 @@ public class FollowNPC : MonoBehaviour
                     _anim.SetTrigger(hashHit);
                     _agent.isStopped = true;
                     yield return new WaitForSeconds(_hittedTime);
-                    _ishitted = false;
+                    _isHitted = false;
                     break;
 
                 case Define.State.Die:
@@ -174,7 +178,7 @@ public class FollowNPC : MonoBehaviour
             if (coll.transform.parent.GetComponent<SkillObject>() is null)
             {
                 Transform _monster = coll.transform.parent;
-                while (_monster.GetComponent<MonsterStat>() == null)
+                while (_monster.GetComponent<MonsterStat>() is null)
                 {
                     _monster = _monster.parent;
                 }
@@ -198,9 +202,7 @@ public class FollowNPC : MonoBehaviour
 
             _hpBar.SetActive(true);
 
-            _anim.SetTrigger(hashHit);
-
-            _ishitted = true;
+            _isHitted = true;
         }
 
         if (coll.CompareTag("Destination"))

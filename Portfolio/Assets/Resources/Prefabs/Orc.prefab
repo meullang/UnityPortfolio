@@ -697,6 +697,8 @@ MonoBehaviour:
   _targetTr: {fileID: 0}
   shortDis: 0
   _state: 2
+  ScreenEffect: {fileID: 0}
+  lt: {fileID: 0}
   traceDist: 20
   attackDist: 2
 --- !u!114 &1144936756895055321
@@ -731,11 +733,9 @@ MonoBehaviour:
   _maxMp: 0
   _attack: 0
   _defence: 0
-  _speed: 0
   _isDead: 0
   _addAttack: 0
   _addDefnece: 0
-  _gold: 0
   _exp: 0
 --- !u!195 &5868997535584176155
 NavMeshAgent:

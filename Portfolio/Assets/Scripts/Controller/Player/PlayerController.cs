@@ -36,17 +36,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool isRun = false;
     [SerializeField]
-    public float moveSpeed = 5.0f;
+    private float _moveSpeed = 5.0f;
     [SerializeField]
-    public float turnSpeed = 0.1f;
+    //private float _turnSpeed = 0.1f;
 
     //상태관련
     public bool isStop = false;
-    private bool isClicked = false;
-    private bool isRoll = false;
-    private bool isDie = false;
-    private bool isSkill = false;
-    private bool isHitted = false;
+
+    private bool _isClicked = false;
+    private bool _isRoll = false;
+    private bool _isDie = false;
+    private bool _isHitted = false;
 
     //사운드 관련
     private bool playWalkSound = false;
@@ -64,15 +64,15 @@ public class PlayerController : MonoBehaviour
     private Image ScreenEffect;
 
     //중력 관련
-    private Vector3 gravityDir;
+    private Vector3 _gravityDir;
     [SerializeField]
-    private float gravity = 20.0f;
+    private float _gravity = 20.0f;
 
     //가장 가까운 몹 찾기
     [SerializeField]
-    private List<GameObject> FoundObjects;
+    private List<GameObject> _FoundObjects;
     [SerializeField]
-    private GameObject enemy;
+    private GameObject _enemy;
     [SerializeField]
     public float shortDis;
 
@@ -129,15 +129,6 @@ public class PlayerController : MonoBehaviour
                 UpdateSkill();
                 break;
         }
-
-        if (skill_2 != null)
-        {
-            skill_2.transform.position = transform.position;
-        }
-        if (skill_3 != null)
-        {
-            skill_3.transform.position = transform.position;
-        }
     }
 
     void Init()
@@ -162,14 +153,14 @@ public class PlayerController : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.rotation.eulerAngles.y;
 
-            if (enemy != null && Vector3.Distance(transform.position, enemy.transform.position) < 10f && !isRun)
-                transform.LookAt(enemy.transform);
+            if (_enemy != null && Vector3.Distance(transform.position, _enemy.transform.position) < 10f && !isRun)
+                transform.LookAt(_enemy.transform);
             else
                 transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
 
             moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-            controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
+            controller.Move(moveDir.normalized * _moveSpeed * Time.deltaTime);
 
             if (Input.GetKeyDown(KeyCode.LeftControl) && !isRun)
             {
@@ -187,8 +178,8 @@ public class PlayerController : MonoBehaviour
         }
 
         //중력을 받는 부분
-        gravityDir.y -= gravity * Time.deltaTime;
-        controller.Move(gravityDir * Time.deltaTime);
+        _gravityDir.y -= _gravity * Time.deltaTime;
+        controller.Move(_gravityDir * Time.deltaTime);
 
         if (!playWalkSound)
         {
@@ -199,7 +190,7 @@ public class PlayerController : MonoBehaviour
         //입력에 따른 상태 변경
         if (Input.GetMouseButtonDown(0) && !isRun)
         {
-            isClicked = true;
+            _isClicked = true;
             _state = Define.State.Attack;
             return;
         }
@@ -224,7 +215,7 @@ public class PlayerController : MonoBehaviour
             Managers.Sound.ControlPitch(gameObject, 2.5f);
             isRun = true;
             anim.SetBool(hashRun, true);
-            moveSpeed = 10f;
+            _moveSpeed = 10f;
 
             _stat.Sp -= 5f * Time.deltaTime;
         }
@@ -233,7 +224,7 @@ public class PlayerController : MonoBehaviour
             Managers.Sound.ControlPitch(gameObject, 1.5f);
             isRun = false;
             anim.SetBool(hashRun, false);
-            moveSpeed = 5f;
+            _moveSpeed = 5f;
         }
     }
 
@@ -254,9 +245,9 @@ public class PlayerController : MonoBehaviour
             noOfClicks = 0;
         }
 
-        if (Input.GetMouseButtonDown(0) || isClicked)
+        if (Input.GetMouseButtonDown(0) || _isClicked)
         {
-            isClicked = false;
+            _isClicked = false;
             lastClickedTime = Time.time;
             noOfClicks++;
             if (noOfClicks == 1)
@@ -279,12 +270,12 @@ public class PlayerController : MonoBehaviour
 
         RecoverSP();
 
-        if (!isRoll)
+        if (!_isRoll)
             anim.SetBool(hashMove, false);
 
         if (Input.GetMouseButtonDown(0))
         {
-            isClicked = true;
+            _isClicked = true;
             _state = Define.State.Attack;
             return;
         }
@@ -301,15 +292,15 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (enemy != null && Vector3.Distance(transform.position, enemy.transform.position) < 10 && !isRoll)
-            transform.LookAt(enemy.transform);
+        if (_enemy != null && Vector3.Distance(transform.position, _enemy.transform.position) < 10 && !_isRoll)
+            transform.LookAt(_enemy.transform);
     }
 
     void UpdateDie()
     {
-        if (!isDie)
+        if (!_isDie)
         {
-            isDie = true;
+            _isDie = true;
             anim.SetTrigger(hashDie);
             StopAllCoroutines();
             controller.enabled = false;
@@ -320,7 +311,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider coll)
     {
-        if (isDie)
+        if (_isDie)
         {
             return;
         }
@@ -335,10 +326,10 @@ public class PlayerController : MonoBehaviour
 
             Managers.Sound.PlayAtPoint(gameObject, "PlayerSound/punch");
 
-            if (coll.transform.parent.GetComponent<SkillObject>() == null)
+            if (coll.transform.parent.GetComponent<SkillObject>() is null)
             {
                 Transform _monster = coll.transform.parent;
-                while (_monster.GetComponent<MonsterStat>() == null)
+                while (_monster.GetComponent<MonsterStat>() is null)
                 {
                     _monster = _monster.parent;
                 }
@@ -377,8 +368,8 @@ public class PlayerController : MonoBehaviour
             i -= Time.deltaTime;
             controller.Move(dir.normalized * 3f * Time.deltaTime);
 
-            gravityDir.y -= gravity * Time.deltaTime;
-            controller.Move(gravityDir * Time.deltaTime);
+            _gravityDir.y -= _gravity * Time.deltaTime;
+            controller.Move(_gravityDir * Time.deltaTime);
             yield return null;
         }
         isStop = false;
@@ -393,18 +384,18 @@ public class PlayerController : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
                 continue;
             }
-            FoundObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("MONSTER"));
-            shortDis = Vector3.Distance(transform.position, FoundObjects[0].transform.position); // 첫번째를 기준으로 잡아주기 
+            _FoundObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("MONSTER"));
+            shortDis = Vector3.Distance(transform.position, _FoundObjects[0].transform.position); // 첫번째를 기준으로 잡아주기 
 
-            enemy = FoundObjects[0]; // 첫번째를 먼저 
+            _enemy = _FoundObjects[0]; // 첫번째를 먼저 
 
-            foreach (GameObject found in FoundObjects)
+            foreach (GameObject found in _FoundObjects)
             {
                 float Distance = Vector3.Distance(transform.position, found.transform.position);
 
                 if (Distance < shortDis) // 위에서 잡은 기준으로 거리 재기
                 {
-                    enemy = found;
+                    _enemy = found;
                     shortDis = Distance;
                 }
             }
@@ -413,13 +404,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator HearMonsterMoan()
+    IEnumerator HearMonsterMoan() //몬스터가 일정 거리 이상 가까워 지면 가장 가까운 못스터가 소리를 냄
     {
         while (!_stat.IsDead)
         {
             yield return new WaitForSeconds(15f);
 
-            if (enemy == null || enemy.GetComponent<MonsterController>() == null)
+            if (_enemy == null || _enemy.GetComponent<MonsterController>() == null)
             {
                 continue;
             }
@@ -427,7 +418,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (shortDis < 20)
                 {
-                    enemy.GetComponent<MonsterController>().Moaning();
+                    _enemy.GetComponent<MonsterController>().Moaning();
                 }
             }
         }
@@ -435,8 +426,7 @@ public class PlayerController : MonoBehaviour
 
     void UpdateSkill()
     {
-        if (!isSkill)
-            StartCoroutine(SkillCorutine());
+        StartCoroutine(SkillCorutine());
     }
 
     IEnumerator UpdateDodgeRoll(Vector3 dir)
@@ -446,13 +436,13 @@ public class PlayerController : MonoBehaviour
 
         float i = 0.9f;
         isStop = true;
-        isRoll = true;
+        _isRoll = true;
 
         PlayerWeapon.SetActive(false);
 
         while (i > 0)
         {
-            if (isHitted)
+            if (_isHitted)
             {
                 break;
             }
@@ -460,31 +450,31 @@ public class PlayerController : MonoBehaviour
             i -= Time.deltaTime;
             controller.Move(dir.normalized * 10f * Time.deltaTime);
 
-            gravityDir.y -= gravity * Time.deltaTime;
-            controller.Move(gravityDir * Time.deltaTime);
+            _gravityDir.y -= _gravity * Time.deltaTime;
+            controller.Move(_gravityDir * Time.deltaTime);
             yield return null;
         }
         PlayerWeapon.SetActive(true);
         isStop = false;
-        isRoll = false;
-        isHitted = false;
+        _isRoll = false;
+        _isHitted = false;
     }
 
     Vector3 _skillTarget;
-    GameObject skill_1;
-    GameObject skill_2;
-    GameObject skill_3;
+    GameObject _skill_1;
+    GameObject _skill_2;
+    GameObject _skill_3;
     IEnumerator SkillCorutine()
     {
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            if (shortDis > 15 || enemy == null)
+            if (shortDis > 15 || _enemy == null)
             {
                 Managers.Notify.SetNotification("적이 스킬 사거리 밖에 있습니다.");
             }
             else
             {
-                GameObject explosion = Managers.Skill.PlayerUseSkill(0, _stat.Mp);
+                GameObject explosion = Managers.Skill.PlayerUseSkill(0, _stat);
                 if (explosion == null || shortDis > 15)
                 {
                     Managers.Notify.SetNotification("스킬이 아직 준비되지 않았거나 마나가 부족합니다.");
@@ -493,23 +483,20 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     anim.SetTrigger(hashSkill);
-                    _stat.Mp -= Managers.Skill.playerSkillSlots[0].ManaCost;
-                    _skillTarget = enemy.transform.position + (Vector3.up * 2.0f);
-                    skill_1 = Instantiate(explosion, _skillTarget, Quaternion.identity);
+                    _skillTarget = _enemy.transform.position + (Vector3.up * 2.0f);
+                    _skill_1 = Instantiate(explosion, _skillTarget, Quaternion.identity);
                     SkillObject mySkill = explosion.GetComponent<SkillObject>();
                     mySkill.skillUser = _stat;
-                    Destroy(skill_1.gameObject, 1.8f);
-                    isSkill = true;
+                    Destroy(_skill_1.gameObject, 1.8f);
                     isStop = true;
                     yield return new WaitForSeconds(1f);
-                    isSkill = false;
                     isStop = false;
                 }
             }
         }
         else if (Input.GetKey(KeyCode.Alpha2))
         {
-            GameObject bladeStorm = Managers.Skill.PlayerUseSkill(1, _stat.Mp);
+            GameObject bladeStorm = Managers.Skill.PlayerUseSkill(1, _stat);
             if (bladeStorm == null)
             {
                 Managers.Notify.SetNotification("스킬이 아직 준비되지 않았거나 마나가 부족합니다.");
@@ -518,22 +505,23 @@ public class PlayerController : MonoBehaviour
             else
             {
                 anim.SetTrigger(hashSkill);
-                _stat.Mp -= Managers.Skill.playerSkillSlots[1].ManaCost;
+                
+                _skill_2 = Instantiate(bladeStorm, transform);
+
                 _skillTarget = transform.position + (Vector3.up * 0.5f);
-                skill_2 = Instantiate(bladeStorm, _skillTarget, Quaternion.identity);
+                _skill_2.transform.position = _skillTarget;
+
                 SkillObject mySkill = bladeStorm.GetComponent<SkillObject>();
                 mySkill.skillUser = _stat;
-                Destroy(skill_2.gameObject, 2.5f);
-                isSkill = true;
+                Destroy(_skill_2.gameObject, 2.5f);
                 isStop = true;
                 yield return new WaitForSeconds(1f);
-                isSkill = false;
                 isStop = false;
             }
         }
         else if (Input.GetKey(KeyCode.Alpha3))
         {
-            GameObject heal = Managers.Skill.PlayerUseSkill(2, _stat.Mp);
+            GameObject heal = Managers.Skill.PlayerUseSkill(2, _stat);
             if (heal == null)
             {
                 Managers.Notify.SetNotification("스킬이 아직 준비되지 않았거나 마나가 부족합니다.");
@@ -542,19 +530,20 @@ public class PlayerController : MonoBehaviour
             else
             {
                 anim.SetTrigger(hashSkill);
-                _stat.Mp -= Managers.Skill.playerSkillSlots[2].ManaCost;
+                
+                _skill_3 = Instantiate(heal, transform);
+
                 _skillTarget = transform.position + (Vector3.up * 0.5f);
-                skill_3 = Instantiate(heal, _skillTarget, Quaternion.identity);
-                SkillObject mySkill = skill_3.GetComponent<SkillObject>();
+                _skill_3.transform.position = _skillTarget;
+
+                SkillObject mySkill = _skill_3.GetComponent<SkillObject>();
 
                 int healAmount = mySkill.damage + _stat.Hp;
 
                 _stat.Hp = Mathf.Clamp(healAmount, 0, _stat.MaxHp);
-                Destroy(skill_3.gameObject, 2.0f);
-                isSkill = true;
+                Destroy(_skill_3.gameObject, 2.0f);
                 isStop = true;
                 yield return new WaitForSeconds(1f);
-                isSkill = false;
                 isStop = false;
             }
         }
@@ -564,9 +553,9 @@ public class PlayerController : MonoBehaviour
 
     float recoverTime = 3;
     float leftTime = 3;
-    void RecoverSP()
+    void RecoverSP() // 스테미나 회복에 대한 함수
     {
-        if (!isRun && !isRoll)
+        if (!isRun && !_isRoll)
         {
             if (leftTime > 0)
                 leftTime -= Time.deltaTime;

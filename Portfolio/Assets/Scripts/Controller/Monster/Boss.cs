@@ -297,7 +297,7 @@ public class Boss : MonoBehaviour
         if (coll.CompareTag("PLAYER_ATTACK"))
         {
             _hpBar.SetActive(true);
-            anim.SetTrigger(hashHit);
+            //anim.SetTrigger(hashHit);
 
             Vector3 pos = coll.GetComponent<Transform>().position;
             MakeBlood(pos);

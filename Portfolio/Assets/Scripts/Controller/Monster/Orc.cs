@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class Orc : MonsterController
 {
-    bool skillCheck = false;
-    float maxSpeed = 20.0f;
-    float originSpeed = 3.5f;
+    bool _skillCheck = false;
+
+    float _originSpeed = 3.5f;
+    float _maxSpeed = 20.0f;
 
     public override void Init()
     {
         base.Init();
 
         WorldObjectType = Define.WorldObject.Orc;
-        _stat = gameObject.GetComponent<MonsterStat>();
+        stat = gameObject.GetComponent<MonsterStat>();
 
-        _stat.SetStat((int)WorldObjectType);
+        stat.SetStat((int)WorldObjectType);
     }
 
     void Start()
@@ -30,13 +31,13 @@ public class Orc : MonsterController
         {
             return Define.State.Hit;
         }
-        else if (distance <= traceDist && !skillCheck)
+        else if (distance <= traceDist && !_skillCheck)
         {
             return Define.State.Skill;
         }
         else if (distance <= attackDist)
         {
-            agent.speed = originSpeed;
+            agent.speed = _originSpeed;
             return Define.State.Attack;
         }
         else if (distance <= traceDist)
@@ -45,25 +46,26 @@ public class Orc : MonsterController
         }
         else
         {
-            skillCheck = false;
-            agent.speed = originSpeed;
+            _skillCheck = false;
+            agent.speed = _originSpeed;
             return Define.State.Idle;
         }
     }
 
-    protected override void UseSkill()
+    protected override void UseSkill() //Attack이 활성화 될 경우 이속 초기화 Idle상태가 되면 이속과 스킬 초기화
     {
         agent.isStopped = true;
-        skillCheck = true;
-        agent.speed = maxSpeed;
+        _skillCheck = true;
+        agent.speed = _maxSpeed;
         anim.SetTrigger(hashSkill);
         Managers.Sound.PlayAtPoint(gameObject, "MonsterSound/OrcRoar");
-    }//공격하면 이속 초기화 평소상태가 되면 이속과 스킬 초기화
+    }
 
     protected override void MonsterDead()
     {
         base.MonsterDead();
 
+        _skillCheck = false;
         Managers.Sound.PlayAtPoint(gameObject, "MonsterSound/OrcDead");
     }
 

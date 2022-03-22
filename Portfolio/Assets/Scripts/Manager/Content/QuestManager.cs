@@ -45,7 +45,7 @@ public class QuestManager
 
     public void CheckQuest(int id)
     {
-        if (questList[nowQuestID + 10].npcID[1] == 0000)
+        if (questList[nowQuestID].npcID[1] == 0000)
             return;
 
         if (id == questList[nowQuestID].npcID[questActionIndex + 1])
@@ -64,7 +64,10 @@ public class QuestManager
 
                 if (questActionIndex == questList[nowQuestID].npcID.Length - 1)
                 {
-                    NPCs[questList[nowQuestID + 10].npcID[1] / 1000].QuestMarkAppear();
+                    if(questList[nowQuestID + 10].npcID[1] != 0000)
+                    {
+                        NPCs[questList[nowQuestID + 10].npcID[1] / 1000].QuestMarkAppear();
+                    }
                 }
                 else
                 {
@@ -87,6 +90,7 @@ public class QuestManager
         nowQuestID += 10;
         questActionIndex = 0;
         isQuestComplete = false;
+        Managers.Sound.Play("quest-done");
 
         _questNote.SetQuestName(questList[nowQuestID].questName[questActionIndex]);
         _questNote.SetQuestSit("´ÙÀ½ Äù½ºÆ®");
@@ -160,7 +164,7 @@ public class QuestManager
         if (questActionIndex == 0)
         {
             NPCs[5].gameObject.SetActive(false);
-            QuestObject = Managers.Instantiate(QuestNPC, QuestNPC.transform.position, QuestNPC.transform.rotation);
+            QuestObject = Managers.Instantiate(QuestNPC);
             return true;
         }
         else if (questActionIndex == 1)
@@ -199,8 +203,12 @@ public class QuestManager
 
     public void Clear()
     {
-        NPCs = null;
         nowQuestID = 10;
         questActionIndex = 0;
+
+        for(int i = 0; i < NPCs.Length; i++)
+        {
+            NPCs[i] = null;
+        }
     }
 }

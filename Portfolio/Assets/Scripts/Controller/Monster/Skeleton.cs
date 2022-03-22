@@ -5,21 +5,18 @@ using UnityEngine;
 public class Skeleton : MonsterController
 {
     [SerializeField]
-    bool skillCheck = false;
+    bool _skillCheck = false;
     [SerializeField]
-    float skillDuration = 20.0f;
-    GameObject loadSkill;
+    float _skillDuration = 20.0f;
 
     public override void Init()
     {
         base.Init();
 
         WorldObjectType = Define.WorldObject.Skeleton;
-        _stat = gameObject.GetComponent<MonsterStat>();
+        stat = gameObject.GetComponent<MonsterStat>();
 
-        _stat.SetStat((int)WorldObjectType);
-
-        loadSkill = Managers.Resource.Load<GameObject>("Prefabs/Particle/MonsterSkill/Skeleton_Skill");
+        stat.SetStat((int)WorldObjectType);
     }
 
     void Start()
@@ -34,7 +31,7 @@ public class Skeleton : MonsterController
         {
             return Define.State.Hit;
         }
-        else if(distance <= traceDist && _stat.Hp <= (_stat.MaxHp / 2) && !skillCheck)
+        else if(distance <= traceDist && stat.Hp <= (stat.MaxHp / 2) && !_skillCheck)
         {
             return Define.State.Skill;
         }
@@ -55,7 +52,7 @@ public class Skeleton : MonsterController
     protected override void UseSkill()
     {
         anim.SetTrigger(hashSkill);
-        skillCheck = true;
+        _skillCheck = true;
 
         agent.isStopped = true;
 
@@ -69,15 +66,15 @@ public class Skeleton : MonsterController
 
     private IEnumerator GetAttackPoint()
     {
-        _stat.AddAttack = 10;
-        _stat.AddDefence = 10;
-        yield return new WaitForSeconds(skillDuration);
+        stat.AddAttack = 10;
+        stat.AddDefence = 10;
+        yield return new WaitForSeconds(_skillDuration);
 
         Managers.Resource.Destroy(monsterSkill.gameObject);
-        skillCheck = false;
+        _skillCheck = false;
 
-        _stat.AddAttack = 0;
-        _stat.AddDefence = 0;
+        stat.AddAttack = 0;
+        stat.AddDefence = 0;
 
     }
 
@@ -94,10 +91,10 @@ public class Skeleton : MonsterController
     {
         base.MonsterDead();
 
-        _stat.AddAttack = 0;
-        _stat.AddDefence = 0;
+        stat.AddAttack = 0;
+        stat.AddDefence = 0;
 
-        skillCheck = false;
+        _skillCheck = false;
 
         Managers.Sound.PlayAtPoint(gameObject, "MonsterSound/SkeletonDead");
     }

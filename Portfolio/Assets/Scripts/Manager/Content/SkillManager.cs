@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class SkillManager
 {
-    /*
-    public List<SkillInfo> SkillInfos = new List<SkillInfo>();
-
-    public Dictionary<int, SkillInfo> MakeDict()
-    {
-        Dictionary<int, SkillInfo> dict = new Dictionary<int, SkillInfo>();
-        foreach (SkillInfo skill in SkillInfos)
-            dict.Add(SkillInfos.code, SkillInfos); //레벨을 키로 받아서 나머지 값을 저장함
-        return dict;
-    }
-    */
-
     public SkillInfo[] playerSkillSlots = new SkillInfo[3];
     public SkillInfo[] bossSkillSlots = new SkillInfo[2];
     public float[] playerLeftCoolingTime = new float[3];
@@ -64,15 +52,16 @@ public class SkillManager
         }
     }
 
-    public GameObject PlayerUseSkill(int n, float _mana)
+    public GameObject PlayerUseSkill(int n, PlayerStat playerStat)
     {
-        if(playerLeftCoolingTime[n] != 0 || _mana < playerSkillSlots[n].ManaCost)
+        if(playerLeftCoolingTime[n] != 0 || playerStat.Mp < playerSkillSlots[n].ManaCost)
         {
             return null;
         }
         else
         {
             playerLeftCoolingTime[n] = playerSkillSlots[n].coolingTime - (playerSkillSlots[n].coolingTimeDecrease * (playerSkillLevel[n] - 1));
+            playerStat.Mp -= playerSkillSlots[n].ManaCost;
             return playerSkillSlots[n].skillPrefab;
         }
     }

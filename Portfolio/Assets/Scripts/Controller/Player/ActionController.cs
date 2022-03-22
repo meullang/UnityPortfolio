@@ -5,7 +5,6 @@ using UnityEngine;
 public class ActionController : MonoBehaviour
 {
     public UI_Inven _Inven;
-    public UI_Shop _Shop;
     public UI_PlayerInfo _Info;
     public UI_Talk _talk;
     public UI_SlotToolTip _toolTip;
@@ -14,15 +13,17 @@ public class ActionController : MonoBehaviour
     private bool canInput = true;
     private float talkTime = 0;
 
-    private PlayerController playerCr;
-    private CameraController cameraCr;
+    private PlayerController _playerCr;
+    private CameraController _cameraCr;
 
     void Start()
     {
-        playerCr = GetComponent<PlayerController>();
-        cameraCr = Camera.main.GetComponent<CameraController>();
+        _playerCr = GetComponent<PlayerController>();
+        _cameraCr = Camera.main.GetComponent<CameraController>();
 
         LockCursorAndMotion();
+
+        StartCoroutine(Delay());
     }
 
     void Update()
@@ -53,16 +54,18 @@ public class ActionController : MonoBehaviour
             }
             else if (coll.CompareTag("NPC"))
             {
-                NPCData _npc = coll.GetComponent<NPCData>();
+                NPCData npc = coll.GetComponent<NPCData>();
 
-                Talk(_npc.npcID, _npc.NPCname);
+                Talk(npc.npcID, npc.NPCname);
                 talkTime = 10;
             }
-            else if (coll.CompareTag("OBJECT"))
+            else if (coll.CompareTag("OBJECT"))//변경해야됨
             {
                 int ItemIndex = _Inven.CheckItemIndex(6);
+
                 if (ItemIndex != -1)
                     _Inven.slots[ItemIndex].SetSlotCount(-1);
+
                 coll.GetComponent<Chest>().OnActive();
             }
             else if (coll.CompareTag("MONEY"))
@@ -76,6 +79,7 @@ public class ActionController : MonoBehaviour
         }
     }
 
+    //단축키로 UI띄우는 부분
     private void TryOpenInventory()
     {
         if (Input.GetKeyDown(KeyCode.I))
@@ -113,7 +117,7 @@ public class ActionController : MonoBehaviour
         }
     }
 
-    private void Talk(int id, string _name)
+    private void Talk(int id, string name)
     {
         LockCursorAndMotion();
 
@@ -138,29 +142,29 @@ public class ActionController : MonoBehaviour
         }
 
         _talk.GetText(talkData);
-        _talk.GetName(_name);
+        _talk.GetName(name);
         Managers.UI.ShowPopupUI<UI_Talk>();
         talkIndex++;
     }
 
-    private void LockCursorAndMotion()
+    private void LockCursorAndMotion() // 커서 + 화면 움직임 막기
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
 
-        playerCr.isStop = true;
-        cameraCr.isStop = true;
+        _playerCr.isStop = true;
+        _cameraCr.isStop = true;
     }
 
-    private void ReleaseCursorAndMotion()
+    private void ReleaseCursorAndMotion() // 커서 + 화면 움직임 풀기
     {
         if (Managers.UI.GetStackSize() < 1)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            playerCr.isStop = false;
-            cameraCr.isStop = false;
+            _playerCr.isStop = false;
+            _cameraCr.isStop = false;
         }
     }
 }

@@ -86,7 +86,6 @@ public class SpawningPool : MonoBehaviour
 
         Vector3 randPos;
         Vector3 spawnPoint;
-
         while (true)
         {
             Vector3 randDir = Random.insideUnitCircle * Random.Range(_nonSpawnRadius, _spawnRadius);

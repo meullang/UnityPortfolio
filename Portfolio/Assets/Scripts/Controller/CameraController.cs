@@ -110,12 +110,12 @@ public class CameraController : MonoBehaviour
 
     Vector3 originPos;
 
-    public IEnumerator Shake(float _amount, float _duration)
+    public IEnumerator Shake(float amount, float duration)
     {
         float timer = 0;
-        while (timer <= _duration)
+        while (timer <= duration)
         {
-            transform.parent.transform.localPosition = (Vector3)Random.insideUnitCircle * _amount + originPos;
+            transform.parent.transform.localPosition = (Vector3)Random.insideUnitCircle * amount + originPos;
 
             timer += Time.unscaledDeltaTime;
             yield return null;

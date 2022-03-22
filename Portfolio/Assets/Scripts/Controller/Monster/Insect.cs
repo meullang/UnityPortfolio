@@ -5,19 +5,16 @@ using UnityEngine;
 public class Insect : MonsterController
 {
     [SerializeField]
-    protected float skillDist = 10;
-    GameObject loadSkill;
+    private float _skillDist = 10;
 
     public override void Init()
     {
         base.Init();
 
         WorldObjectType = Define.WorldObject.Insect;
-        _stat = gameObject.GetComponent<MonsterStat>();
+        stat = gameObject.GetComponent<MonsterStat>();
 
-        _stat.SetStat((int)WorldObjectType);
-
-        loadSkill = Managers.Resource.Load<GameObject>("Prefabs/Particle/MonsterSkill/InsectSkill");
+        stat.SetStat((int)WorldObjectType);
     }
 
     void Start()
@@ -37,7 +34,7 @@ public class Insect : MonsterController
         {
             return Define.State.Attack;
         }
-        else if(distance <= skillDist)
+        else if(distance <= _skillDist)
         {
             return Define.State.Skill;
         }
@@ -57,11 +54,6 @@ public class Insect : MonsterController
         agent.isStopped = true;
         anim.SetBool(hashAttack, false);
         anim.SetBool(hashSkill, true);
-    }
-
-    protected override void Attack()
-    {
-        base.Attack();
     }
 
     protected override void MakeDropItem()
@@ -99,13 +91,7 @@ public class Insect : MonsterController
         Managers.Resource.Destroy(monsterSkill.gameObject);
     }
 
-    void Insect_EnableWeapon()
-    {
-        monsterWeapon.GetComponent<Collider>().enabled = true;
-    }
+    void Insect_EnableWeapon() => monsterWeapon.GetComponent<Collider>().enabled = true;
 
-    void Insect_DisableWeapon()
-    {
-        monsterWeapon.GetComponent<Collider>().enabled = false;
-    }
+    void Insect_DisableWeapon() => monsterWeapon.GetComponent<Collider>().enabled = false;
 }

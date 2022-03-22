@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MonsterController : MonoBehaviour
 {
     #region setting
-    protected MonsterStat _stat;
+    protected MonsterStat stat;
     protected NavMeshAgent agent;
     protected Animator anim;
 
@@ -19,11 +19,11 @@ public class MonsterController : MonoBehaviour
     protected readonly int hashDie = Animator.StringToHash("Die");
     protected readonly int hashReady = Animator.StringToHash("Ready");
     #endregion
-    //몬스터의 무기
+    //몬스터의 공격
     [SerializeField]
     protected GameObject monsterWeapon;
     protected GameObject monsterSkill;
-    protected CameraController cam;
+    private CameraController _cam;
 
     //가장 가까운 표적 찾기
     [SerializeField]
@@ -38,9 +38,9 @@ public class MonsterController : MonoBehaviour
     protected Define.State _state = Define.State.Idle;
     public Define.WorldObject WorldObjectType { get; protected set; } = Define.WorldObject.Unknown;
 
+
     [SerializeField]
     private Image ScreenEffect;
-
     [SerializeField]
     private Light lt;
 
@@ -52,7 +52,7 @@ public class MonsterController : MonoBehaviour
     protected float attackDist = 2.0f;
 
     //애니메이션과 코드 매칭을 위한 애니메이션 재생 시간
-    protected float hittedTime = 1.0f;
+    protected float hittedTime;
     protected float skillTime;
 
     //체력바 온 오프를 위한 변수
@@ -70,7 +70,7 @@ public class MonsterController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.destination = _targetTr.transform.position;
-        cam = Camera.main.GetComponent<CameraController>();
+        _cam = Camera.main.GetComponent<CameraController>();
         ScreenEffect = GameObject.Find("Attack").GetComponent<Image>();
         lt = GameObject.Find("Directional Light").GetComponent<Light>();
     }
@@ -112,7 +112,7 @@ public class MonsterController : MonoBehaviour
             return;
         }
 
-        if (agent.remainingDistance >= 2.0f)
+        if (agent.remainingDistance >= 2.0f && !isDie)
         {
             Vector3 direction = agent.desiredVelocity;
             if (direction != Vector3.zero)
@@ -226,7 +226,6 @@ public class MonsterController : MonoBehaviour
                     break;
 
                 case Define.State.Hit:
-                    //anim.SetTrigger(hashHit);
                     agent.isStopped = true;
                     yield return new WaitForSeconds(hittedTime);
                     hitted = false;
@@ -254,11 +253,11 @@ public class MonsterController : MonoBehaviour
                     MakeDropItem();
 
                     yield return new WaitForSeconds(7.0f);
-                    //재가공   
+
                     _hpBar.SetActive(false);
-                    _stat.IsDead = false;
-                    _stat.Hp = _stat.MaxHp;
-                    _stat.Mp = _stat.MaxMp;
+                    stat.IsDead = false;
+                    stat.Hp = stat.MaxHp;
+                    stat.Mp = stat.MaxMp;
                     Managers.Game.Despawn(gameObject);
 
                     GetComponent<CapsuleCollider>().enabled = true;
@@ -277,23 +276,24 @@ public class MonsterController : MonoBehaviour
         return;
     }
 
-    GameObject blood;
+    private GameObject _blood;
     protected void MakeBlood(Vector3 pos)
     {
-        blood = Managers.Resource.Instantiate("Particle/BloodExplosion");
-        blood.transform.position = pos;
+        _blood = Managers.Resource.Instantiate("Particle/BloodExplosion");
+        _blood.transform.position = pos;
         Invoke("RemoveBlood", 0.5f);
     }
 
     protected void RemoveBlood()
     {
-        Managers.Resource.Destroy(blood.gameObject);
+        Managers.Resource.Destroy(_blood.gameObject);
     }
 
     protected virtual void MonsterDead()
     {
         gameObject.tag = "CORPSE";
         agent.isStopped = true;
+        isLook = false;
         anim.SetTrigger(hashDie);
         if (monsterSkill != null)
             Managers.Resource.Destroy(monsterSkill.gameObject);
@@ -308,17 +308,17 @@ public class MonsterController : MonoBehaviour
         anim.SetBool(hashAttack, true);
     }
 
-    GameObject dropMoney;
+    private GameObject _dropMoney;
     protected virtual void MakeDropItem()
     {
-        dropMoney = Managers.Resource.Instantiate("Item_Prefab/Crystal");
-        dropMoney.transform.position = this.transform.position + new Vector3(0f, 0.1f, 0f);
+        _dropMoney = Managers.Resource.Instantiate("Item_Prefab/Crystal");
+        _dropMoney.transform.position = this.transform.position + new Vector3(0f, 0.1f, 0f);
         Invoke("RemoveMoney", 20.0f);
     }
 
     protected void RemoveMoney()
     {
-        Managers.Resource.Destroy(dropMoney.gameObject);
+        Managers.Resource.Destroy(_dropMoney.gameObject);
     }
 
     void OnTriggerEnter(Collider coll)
@@ -344,9 +344,9 @@ public class MonsterController : MonoBehaviour
                 }
 
                 PlayerStat _playerStat = _player.GetComponent<PlayerStat>();
-                _stat.OnAttacked(_playerStat, _playerStat.Attack);
+                stat.OnAttacked(_playerStat, _playerStat.Attack);
                 StartCoroutine(TimeEffect());
-                StartCoroutine(cam.Shake(0.2f, 0.1f));
+                StartCoroutine(_cam.Shake(0.2f, 0.1f));
             }
             else
             {
@@ -355,10 +355,10 @@ public class MonsterController : MonoBehaviour
 
                 Stat _playerStat = _skill.skillUser;
 
-                _stat.OnAttacked(_playerStat, _skill.damage);
+                stat.OnAttacked(_playerStat, _skill.damage);
             }
 
-            if (_stat.IsDead)
+            if (stat.IsDead)
                 _state = Define.State.Die;
 
             hitted = true;

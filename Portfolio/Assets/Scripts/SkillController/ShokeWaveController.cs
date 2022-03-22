@@ -10,7 +10,7 @@ public class ShokeWaveController : MonoBehaviour
     private void OnEnable()
     {
         transform.localScale = new Vector3(1, 1, 1);
-        StartCoroutine(DisableCollider());
+        //StartCoroutine(DisableCollider());
     }
 
     private void Update()
