@@ -106,13 +106,16 @@ public class UI_PlayerInfo : UI_Popup
         SetSkillSlot();
         Managers.SaveLoad.theInfo = this;
         Managers.Game._info = this;
+    }
 
+    private void Start()
+    {
         equipmentSlots[0].AddItem(Managers.Database.ItemDictionary[13]);
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        StartCoroutine(SetInfo());
+        SetInfo();
     }
 
     private void SetSkillSlot()
@@ -168,15 +171,11 @@ public class UI_PlayerInfo : UI_Popup
         }
     }
 
-    private IEnumerator SetInfo()
+    private void SetInfo()
     {
-        while (true)
-        {
-            SetSkillPoint();
-            SetStatus();
-            SetEquipment();
-            yield return null;
-        }
+        SetSkillPoint();
+        SetStatus();
+        SetEquipment();
     }
 
     private void SetSkillPoint()

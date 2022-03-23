@@ -52,8 +52,6 @@ public class GameScene : BaseScene
         
         StartCoroutine(Managers.Skill.cooling());
 
-        //Managers.Quest.SetFirstQuest();
-
         Managers.Sound.Play("Sounds/Bgm/FarmDay", Define.Sound.Bgm);
     }
 

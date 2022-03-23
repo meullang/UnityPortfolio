@@ -19,7 +19,8 @@ MonoBehaviour:
   itemType: 0
   weaponCode: 1
   itemImage: {fileID: 21300000, guid: 95052c6b62fb3de4695beaa99f842ac2, type: 3}
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 81762650210848480, guid: 2e731fb4dbb6cdc4f8faa1fb081d8844,
+    type: 3}
   attack: 25
   defence: 0
   giveHp: 0
