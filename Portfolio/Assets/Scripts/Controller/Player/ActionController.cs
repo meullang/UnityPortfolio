@@ -64,9 +64,14 @@ public class ActionController : MonoBehaviour
                 int ItemIndex = _Inven.CheckItemIndex(6);
 
                 if (ItemIndex != -1)
+                {
                     _Inven.slots[ItemIndex].SetSlotCount(-1);
-
-                coll.GetComponent<Chest>().OnActive();
+                    coll.GetComponent<Chest>().OnActive();
+                }
+                else
+                {
+                    Managers.Notify.SetNotification("열쇠가 없습니다.");
+                } 
             }
             else if (coll.CompareTag("MONEY"))
             {

@@ -66,8 +66,6 @@ public class UI_Setting : UI_Popup
         mixer = Managers.Sound.GetAudioMixer();
 
         ResetSlider();
-
-        Managers.Game._setting = this;
     }
 
     private void OnEnable()
@@ -104,7 +102,7 @@ public class UI_Setting : UI_Popup
     {
         if(_player.shortDis < 20)
         {
-            Managers.Notify.SetNotification("몬스터가 가까이에 있어 저장할 수 없습니다.");
+            Managers.Notify.SetNotification("몬스터가 가까이에 있을 때는 저장할 수 없습니다.");
         }
         else
         {

@@ -13,6 +13,9 @@ public class TitleScene : BaseScene
         Managers.UI.ShowSceneUI<TitleUI>();
 
         Managers.Sound.Play("Sounds/Bgm/TitleScreen", Define.Sound.Bgm);
+
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     public override void Clear()

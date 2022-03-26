@@ -14,7 +14,7 @@
       "maxMp": "75",
       "attack": "14",
       "defence": "4",
-      "totalExp": "50"
+      "totalExp": "120"
     },
     {
       "level": "3",
@@ -22,7 +22,7 @@
       "maxMp": "100",
       "attack": "18",
       "defence": "6",
-      "totalExp": "100"
+      "totalExp": "300"
     },
     {
       "level": "4",
@@ -30,7 +30,7 @@
       "maxMp": "125",
       "attack": "22",
       "defence": "8",
-      "totalExp": "200"
+      "totalExp": "600"
     },
     {
       "level": "5",
@@ -38,7 +38,7 @@
       "maxMp": "150",
       "attack": "26",
       "defence": "10",
-      "totalExp": "400"
+      "totalExp": "1000"
     }
   ]
 }

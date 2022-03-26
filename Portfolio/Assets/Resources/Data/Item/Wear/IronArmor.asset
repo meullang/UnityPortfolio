@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IronArmor
   m_EditorClassIdentifier: 
   itemCode: 8
-  itemName: IronArmor
+  itemName: "\uCCA0 \uAC11\uC637"
   itemDesc: "20\uC758 \uBC29\uC5B4\uB825\uC744 \uC8FC\uB294 \uB2E8\uB2E8\uD55C \uCCA0
     \uAC11\uC637"
   itemType: 1

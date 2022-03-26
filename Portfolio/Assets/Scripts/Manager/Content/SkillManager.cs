@@ -6,6 +6,10 @@ public class SkillManager
 {
     public SkillInfo[] playerSkillSlots = new SkillInfo[3];
     public SkillInfo[] bossSkillSlots = new SkillInfo[2];
+
+    public SkillInfo[] monsterSkillSlots = new SkillInfo[3];
+    public float[] monsterLeftCoolingTime = new float[2];
+
     public float[] playerLeftCoolingTime = new float[3];
     public float[] bossLeftCoolingTime = new float[2];
     public int[] playerSkillLevel = new int[3];
@@ -48,6 +52,7 @@ public class SkillManager
             {
                 bossLeftCoolingTime[i] = Mathf.Clamp(bossLeftCoolingTime[i] -= 0.1f, 0, bossSkillSlots[i].coolingTime);
             }
+
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -60,9 +65,15 @@ public class SkillManager
         }
         else
         {
+            //조건이 맞을 경우 쿨타임과 마나 소모량을 적용시킴
             playerLeftCoolingTime[n] = playerSkillSlots[n].coolingTime - (playerSkillSlots[n].coolingTimeDecrease * (playerSkillLevel[n] - 1));
             playerStat.Mp -= playerSkillSlots[n].ManaCost;
-            return playerSkillSlots[n].skillPrefab;
+
+            //스킬에 플레이어 정보를 넘김
+            GameObject playerSkillObj = playerSkillSlots[n].skillPrefab;
+            playerSkillObj.GetComponent<SkillObject>().skillUser = playerStat;
+
+            return playerSkillObj;
         }
     }
 
@@ -71,6 +82,20 @@ public class SkillManager
         bossLeftCoolingTime[n] = bossSkillSlots[n].coolingTime;
         return bossSkillSlots[n].skillPrefab;
     }
+
+    /*  몬스터 각 개체에 따른 쿨타임 조절이 힘듬
+    public GameObject MonsterUseSkill(int n, MonsterStat monsterStat)
+    {
+        GameObject monsterSkillObj;
+
+        monsterLeftCoolingTime[n] = monsterSkillSlots[n].coolingTime;
+
+        monsterSkillObj = monsterSkillSlots[n].skillPrefab;
+        monsterSkillObj.GetComponent<SkillObject>().skillByMonster = monsterStat;
+
+        return monsterSkillSlots[n].skillPrefab;
+    }
+    */
 
     public float leftCoolTingTime(int n)
     {

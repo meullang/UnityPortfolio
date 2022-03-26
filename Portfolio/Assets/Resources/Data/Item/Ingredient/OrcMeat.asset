@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OrcMeat
   m_EditorClassIdentifier: 
   itemCode: 4
-  itemName: "\uC624\uD06C \uACE0"
+  itemName: "\uC624\uD06C \uACE0\uAE30"
   itemDesc: "\uC8FD\uC740 \uC624\uD06C\uC5D0\uAC8C\uC11C \uC5BB\uC740 \uACE0\uAE30"
   itemType: 5
   weaponCode: 0

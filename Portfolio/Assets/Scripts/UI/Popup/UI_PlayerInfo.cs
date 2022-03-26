@@ -50,13 +50,7 @@ public class UI_PlayerInfo : UI_Popup
 
     public void LoadToEquipment(int _arrayNum, int _itemCode)
     {
-        for (int i = 0; i < Managers.Database.ItemList.Count; i++)
-        {
-            if (Managers.Database.ItemList[i].itemCode == _itemCode)
-            {
-                equipmentSlots[_arrayNum].AddItem(Managers.Database.ItemList[i]);
-            }
-        }
+        equipmentSlots[_arrayNum].AddItem(Managers.Database.ItemDictionary[_itemCode]);
     }
 
     public override void Init()
@@ -105,7 +99,6 @@ public class UI_PlayerInfo : UI_Popup
 
         SetSkillSlot();
         Managers.SaveLoad.theInfo = this;
-        Managers.Game._info = this;
     }
 
     private void Start()

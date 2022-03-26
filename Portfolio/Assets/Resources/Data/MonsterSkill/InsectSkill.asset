@@ -16,7 +16,7 @@ MonoBehaviour:
   skillName: "\uD30C\uAD34\uAD11\uC120"
   skillDesc: 
   ManaCost: 0
-  damage: 20
+  damage: 25
   coolingTime: 0
   damageIncreaseRate: 0
   coolingTimeDecrease: 0

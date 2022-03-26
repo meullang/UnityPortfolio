@@ -70,13 +70,7 @@ public class GamePlayUI : UI_Scene
 
     public void LoadToQuick(int _arrayNum, int _itemCode, int _itemNum)
     {
-        for (int i = 0; i < Managers.Database.ItemList.Count; i++)
-        {
-            if (Managers.Database.ItemList[i].itemCode == _itemCode)
-            {
-                ItemSlots[_arrayNum].AddItem(Managers.Database.ItemList[i], _itemNum);
-            }
-        }
+        ItemSlots[_arrayNum].AddItem(Managers.Database.ItemDictionary[_itemCode], _itemNum);
     }
 
     public void Start()

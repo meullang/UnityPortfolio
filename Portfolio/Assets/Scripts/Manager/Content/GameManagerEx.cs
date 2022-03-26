@@ -13,11 +13,6 @@ public class GameManagerEx
     GameObject _player;
     GameObject _boss;
 
-    public UI_Inven _inven = null;
-    public UI_PlayerInfo _info = null;
-    public UI_Setting _setting = null;
-    public UI_Shop _shop = null;
-
     HashSet<GameObject> _skeleton = new HashSet<GameObject>();
     HashSet<GameObject> _orc = new HashSet<GameObject>();
     HashSet<GameObject> _insect = new HashSet<GameObject>();

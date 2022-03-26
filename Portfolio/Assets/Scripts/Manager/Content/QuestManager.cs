@@ -10,7 +10,9 @@ public class QuestManager
     public Dictionary<int, Data.Quest> questList;
 
     public PlayerStat _stat;
-    public UI_Inven _Inven;
+    public UI_Inven _inven;
+    public UI_Shop _shop;
+
     public NPCData[] NPCs = new NPCData[10];
     public GameObject QuestNPC;
     public bool isDoneCheck = false;
@@ -90,7 +92,7 @@ public class QuestManager
         nowQuestID += 10;
         questActionIndex = 0;
         isQuestComplete = false;
-        Managers.Sound.Play("quest-done");
+        Managers.Sound.Play("OutWorld/quest-done");
 
         _questNote.SetQuestName(questList[nowQuestID].questName[questActionIndex]);
         _questNote.SetQuestSit("´ÙÀ½ Äù½ºÆ®");
@@ -118,13 +120,13 @@ public class QuestManager
         Item questItem = Managers.Database.ItemDictionary[12];
         if (questActionIndex == 0)
         {
-            _Inven.AcquireItem(questItem);
+            _inven.AcquireItem(questItem);
             return true;
         }
-        else if (questActionIndex == 1 && _Inven.CheckItemIndex(questItem.itemCode) != -1)
+        else if (questActionIndex == 1 && _inven.CheckItemIndex(questItem.itemCode) != -1)
         {
-            _Inven.slots[_Inven.CheckItemIndex(questItem.itemCode)].ClearSlot();
-            _Inven.AcquireItem(Managers.Database.ItemDictionary[6], 2);
+            _inven.slots[_inven.CheckItemIndex(questItem.itemCode)].ClearSlot();
+            _inven.AcquireItem(Managers.Database.ItemDictionary[6], 2);
             return true;
         }
         else
@@ -140,11 +142,11 @@ public class QuestManager
         {
             return true;
         }
-        else if (questActionIndex == 1 && _Inven.CheckItemIndex(questItem.itemCode) != -1)
+        else if (questActionIndex == 1 && _inven.CheckItemIndex(questItem.itemCode) != -1)
         {
-            if (_Inven.slots[_Inven.CheckItemIndex(questItem.itemCode)].itemCount >= 5)
+            if (_inven.slots[_inven.CheckItemIndex(questItem.itemCode)].itemCount >= 5)
             {
-                _Inven.slots[_Inven.CheckItemIndex(questItem.itemCode)].SetSlotCount(-5);
+                _inven.slots[_inven.CheckItemIndex(questItem.itemCode)].SetSlotCount(-5);
                 return true;
             }
             else
@@ -176,7 +178,7 @@ public class QuestManager
             NPCs[5].gameObject.SetActive(true);
             Managers.Destroy(QuestObject.gameObject);
 
-            _Inven.AcquireItem(Managers.Database.ItemDictionary[15]);
+            _inven.AcquireItem(Managers.Database.ItemDictionary[15]);
             return true;
         }
         else

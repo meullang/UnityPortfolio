@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
+        _stat = gameObject.GetComponent<PlayerStat>();
         cam = Camera.main;
 
         Init();
@@ -134,7 +135,6 @@ public class PlayerController : MonoBehaviour
     void Init()
     {
         WorldObjectType = Define.WorldObject.Player;
-        _stat = gameObject.GetComponent<PlayerStat>();
         Managers.Database._playerStat = this.GetComponent<PlayerStat>();
     }
 
@@ -461,9 +461,7 @@ public class PlayerController : MonoBehaviour
     }
 
     Vector3 _skillTarget;
-    GameObject _skill_1;
-    GameObject _skill_2;
-    GameObject _skill_3;
+    GameObject _skill;
     IEnumerator SkillCorutine()
     {
         if (Input.GetKey(KeyCode.Alpha1))
@@ -484,10 +482,8 @@ public class PlayerController : MonoBehaviour
                 {
                     anim.SetTrigger(hashSkill);
                     _skillTarget = _enemy.transform.position + (Vector3.up * 2.0f);
-                    _skill_1 = Instantiate(explosion, _skillTarget, Quaternion.identity);
-                    SkillObject mySkill = explosion.GetComponent<SkillObject>();
-                    mySkill.skillUser = _stat;
-                    Destroy(_skill_1.gameObject, 1.8f);
+                    _skill = Instantiate(explosion, _skillTarget, Quaternion.identity);
+                    Destroy(_skill.gameObject, 1.8f);
                     isStop = true;
                     yield return new WaitForSeconds(1f);
                     isStop = false;
@@ -506,14 +502,12 @@ public class PlayerController : MonoBehaviour
             {
                 anim.SetTrigger(hashSkill);
                 
-                _skill_2 = Instantiate(bladeStorm, transform);
+                _skill = Instantiate(bladeStorm, transform);
 
                 _skillTarget = transform.position + (Vector3.up * 0.5f);
-                _skill_2.transform.position = _skillTarget;
+                _skill.transform.position = _skillTarget;
 
-                SkillObject mySkill = bladeStorm.GetComponent<SkillObject>();
-                mySkill.skillUser = _stat;
-                Destroy(_skill_2.gameObject, 2.5f);
+                Destroy(_skill.gameObject, 2.5f);
                 isStop = true;
                 yield return new WaitForSeconds(1f);
                 isStop = false;
@@ -531,17 +525,15 @@ public class PlayerController : MonoBehaviour
             {
                 anim.SetTrigger(hashSkill);
                 
-                _skill_3 = Instantiate(heal, transform);
+                _skill = Instantiate(heal, transform);
 
                 _skillTarget = transform.position + (Vector3.up * 0.5f);
-                _skill_3.transform.position = _skillTarget;
+                _skill.transform.position = _skillTarget;
 
-                SkillObject mySkill = _skill_3.GetComponent<SkillObject>();
-
-                int healAmount = mySkill.damage + _stat.Hp;
+                int healAmount = _skill.GetComponent<SkillObject>().damage + _stat.Hp;
 
                 _stat.Hp = Mathf.Clamp(healAmount, 0, _stat.MaxHp);
-                Destroy(_skill_3.gameObject, 2.0f);
+                Destroy(_skill.gameObject, 2.0f);
                 isStop = true;
                 yield return new WaitForSeconds(1f);
                 isStop = false;

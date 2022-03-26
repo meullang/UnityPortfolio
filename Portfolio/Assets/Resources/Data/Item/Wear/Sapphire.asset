@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sapphire
   m_EditorClassIdentifier: 
   itemCode: 11
-  itemName: Sapphire
+  itemName: "\uC0AC\uD30C\uC774\uC5B4"
   itemDesc: "15\uC758 \uACF5\uACA9\uB825\uC758 \uC8FC\uB294 \uC7A5\uC2E0\uAD6C"
   itemType: 2
   weaponCode: 0

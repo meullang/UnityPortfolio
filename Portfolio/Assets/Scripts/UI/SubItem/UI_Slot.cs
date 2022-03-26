@@ -57,7 +57,7 @@ public class UI_Slot : UI_Base
         itemCount = _count;
         item_Icon.sprite = item.itemImage;
 
-        if (item.itemType == Item.ItemType.Used || item.itemType == Item.ItemType.Ingredient)
+        if (item.itemType == Item.ItemType.Used || item.itemType == Item.ItemType.Ingredient || item.itemType == Item.ItemType.ETC)
         {
             count_Image.SetActive(true);
             text_Count.text = itemCount.ToString();
@@ -71,16 +71,16 @@ public class UI_Slot : UI_Base
         SetColor(1);
     }
 
-    private void SetColor(float _alpha)
+    private void SetColor(float alpha)
     {
         Color color = item_Icon.color;
-        color.a = _alpha;
+        color.a = alpha;
         item_Icon.color = color;
     }
 
-    public void SetSlotCount(int _count)
+    public void SetSlotCount(int count)
     {
-        itemCount += _count;
+        itemCount += count;
         text_Count.text = itemCount.ToString();
 
         if (itemCount <= 0)

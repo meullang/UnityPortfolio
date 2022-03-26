@@ -21,8 +21,8 @@ public class NPCData : MonoBehaviour
 
     private void Start()
     {
-        _Inven = Managers.Game._inven;
-        _Shop = Managers.Game._shop;
+        _Inven = Managers.Quest._inven;
+        _Shop = Managers.Quest._shop;
     }
 
     public void OnActive()

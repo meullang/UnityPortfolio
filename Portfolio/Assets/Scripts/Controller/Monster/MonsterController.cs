@@ -353,7 +353,7 @@ public class MonsterController : MonoBehaviour
                 Transform skillObj = coll.transform.parent;
                 SkillObject _skill = skillObj.GetComponent<SkillObject>();
 
-                Stat _playerStat = _skill.skillUser;
+                PlayerStat _playerStat = _skill.skillUser;
 
                 stat.OnAttacked(_playerStat, _skill.damage);
             }

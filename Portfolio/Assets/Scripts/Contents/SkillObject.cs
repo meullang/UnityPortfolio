@@ -6,8 +6,8 @@ public class SkillObject : MonoBehaviour
 {
     public SkillInfo skillInfo;
 
-    public int damage;
-    public Stat skillUser;
+    public int damage = 0;
+    public PlayerStat skillUser;
 
     private void OnEnable()
     {

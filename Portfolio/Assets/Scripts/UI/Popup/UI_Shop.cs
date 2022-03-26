@@ -34,7 +34,7 @@ public class UI_Shop : UI_Popup
         moveArea = Get<GameObject>((int)GameObjects.Shop);
         BindEvent(movePoint, (PointerEventData data) => { moveArea.transform.position = data.position; }, Define.UIEvent.Drag);
 
-        Managers.Game._shop = this;
+        Managers.Quest._shop = this;
     }
 
     private void Start()

@@ -306,6 +306,8 @@ public class Boss : MonoBehaviour
 
             if (coll.transform.parent.GetComponent<SkillObject>() == null)
             {
+                Managers.Sound.PlayAtPoint(gameObject, "MonsterSound/swordHitted");
+
                 Transform _player = coll.transform.parent;
                 while (_player.GetComponent<PlayerStat>() == null)
                 {

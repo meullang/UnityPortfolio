@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Key
   m_EditorClassIdentifier: 
   itemCode: 6
-  itemName: Key
+  itemName: "\uC5F4\uC1E0"
   itemDesc: "\uB9F5 \uC8FC\uBCC0\uC5D0\uC11C \uBCF4\uBB3C\uC0C1\uC790\uB97C \uCC3E\uC544\uBCF4\uC138\uC694"
   itemType: 6
   weaponCode: 0

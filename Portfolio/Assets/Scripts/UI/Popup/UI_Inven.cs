@@ -48,9 +48,8 @@ public class UI_Inven : UI_Popup
         BindEvent(movePoint, (PointerEventData data) => { moveArea.transform.position = data.position; }, Define.UIEvent.Drag);
 
         SetMoneyText();
-        Managers.Game._inven = this;
         Managers.Database._Inven = this;
-        Managers.Quest._Inven = this;
+        Managers.Quest._inven = this;
         Managers.SaveLoad.theInven = this;
     }
 
@@ -58,13 +57,7 @@ public class UI_Inven : UI_Popup
 
     public void LoadToInven(int _arrayNum, int _itemCode, int _itemNum)
     {
-        for(int i=0;i< Managers.Database.ItemList.Count; i++)
-        {
-            if(Managers.Database.ItemList[i].itemCode == _itemCode)
-            {
-                slots[_arrayNum].AddItem(Managers.Database.ItemList[i], _itemNum);
-            }
-        }
+        slots[_arrayNum].AddItem(Managers.Database.ItemDictionary[_itemCode], _itemNum);
     }
 
     public int CheckItemIndex(int _code)
@@ -82,7 +75,43 @@ public class UI_Inven : UI_Popup
 
         return -1;
     }
+    /*
+    public bool CheckItemIndex(int _code, bool erase = false, int eraseNum = 1)
+    {
+        int slotNum = -1;
 
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item != null)
+            {
+                if (slots[i].item.itemCode == _code)
+                {
+                    slotNum = i;
+                    break;
+                }
+            }
+        }
+
+        if(slotNum == -1)
+        {
+            return false;
+        }
+
+        if (erase && slots[slotNum].itemCount >= eraseNum)
+        {
+            slots[slotNum].SetSlotCount(eraseNum);
+            return true;
+        }
+        else if (!erase)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    */
     public void AcquireItem(Item _item, int _count = 1)
     {
         if (Item.ItemType.Used == _item.itemType || Item.ItemType.Ingredient == _item.itemType)

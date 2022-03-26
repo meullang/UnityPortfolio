@@ -104,6 +104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillInfo: {fileID: 11400000, guid: b40ff8975c3869a4bab4bfc40e57f2c9, type: 2}
+  damage: 0
+  skillUser: {fileID: 0}
 --- !u!1 &7919161881270856951
 GameObject:
   m_ObjectHideFlags: 0

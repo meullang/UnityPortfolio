@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LeatherArmor
   m_EditorClassIdentifier: 
   itemCode: 7
-  itemName: LeatherArmor
+  itemName: "\uAC00\uC8FD \uAC11\uC637"
   itemDesc: "\uB098\uC058\uC9C0 \uC54A\uC740 \uAC00\uC8FD \uAC11\uC637\uC73C\uB85C
     10\uC758 \uBC29\uC5B4\uB825\uAC00\uC9C0\uACE0 \uC788\uB2E4"
   itemType: 1

@@ -6,9 +6,6 @@ using System.IO;
 [System.Serializable]
 public class SaveData
 {
-    public Vector3 playerPos;
-    public Vector3 playerRot;
-
     public int playerLevel;
     public int playerExp;
     public int playerHp;
@@ -49,7 +46,7 @@ public class SaveLoadManager
 
     void Init()
     {
-        SAVE_DATA_DIRECTORY = Application.dataPath + "/Saves/";
+        SAVE_DATA_DIRECTORY = Application.persistentDataPath + "/Saves/";
 
         if (!Directory.Exists(SAVE_DATA_DIRECTORY))
         {
@@ -132,17 +129,17 @@ public class SaveLoadManager
                 Managers.Skill.playerSkillLevel[i] = saveData.skillLevel[i];
             }
 
-            for (int i = 0; i < saveData.invenItemCode.Count; ++i)
-            {
-                theInven.LoadToInven(saveData.invenArrayNumber[i], saveData.invenItemCode[i], saveData.invenItemNumber[i]);
-            }
-
-            for (int i = 0; i < saveData.equipmentItemCode.Count; ++i)
+            for (int i = 0; i < saveData.equipmentNumber.Count; ++i)
             {
                 theInfo.LoadToEquipment(saveData.equipmentNumber[i], saveData.equipmentItemCode[i]);
             }
 
-            for(int i=0;i<saveData.quickItemCode.Count; ++i)
+            for (int i = 0; i < saveData.invenArrayNumber.Count; ++i)
+            {
+                theInven.LoadToInven(saveData.invenArrayNumber[i], saveData.invenItemCode[i], saveData.invenItemNumber[i]);
+            }
+
+            for (int i=0;i<saveData.quickArrayNumber.Count; ++i)
             {
                 theGameUI.LoadToQuick(saveData.quickItemNumber[i], saveData.quickItemCode[i], saveData.quickItemNumber[i]);
             }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StaminaPotion
   m_EditorClassIdentifier: 
   itemCode: 2
-  itemName: Potion_Stamina
+  itemName: "\uC2A4\uD14C\uBBF8\uB098 \uD3EC\uC158"
   itemDesc: "\uC2A4\uD14C\uBBF8\uB108\uB97C 50\uD68C\uBCF5\uC2DC\uCF1C\uC8FC\uB294
     \uBB3C\uC57D"
   itemType: 4

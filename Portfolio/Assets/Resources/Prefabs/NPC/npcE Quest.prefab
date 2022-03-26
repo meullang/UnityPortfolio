@@ -5428,12 +5428,12 @@ Rigidbody:
   m_GameObject: {fileID: 812827224343458137}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 0.1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!135 &811718402453190997
 SphereCollider:
@@ -5459,9 +5459,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1.9734561
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.03, z: 0}
 --- !u!114 &812827224343458136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5478,6 +5478,8 @@ MonoBehaviour:
   npcID: 6000
   num: 6
   Mark: {fileID: 0}
+  _Inven: {fileID: 0}
+  _Shop: {fileID: 0}
 --- !u!114 &812827224343458119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5491,7 +5493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 2
-  stopDist: 3
+  _distance: 0
 --- !u!195 &812827224343458118
 NavMeshAgent:
   m_ObjectHideFlags: 0
