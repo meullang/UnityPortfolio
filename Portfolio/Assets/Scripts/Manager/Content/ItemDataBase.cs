@@ -10,6 +10,7 @@ public class ItemDataBase
     public GameObject money;
 
     public UI_Inven _Inven;
+    public UI_PlayerInfo _PlayerInfo;
     public PlayerStat _playerStat;
 
     private const string HP = "HP", MP = "MP", SP = "SP";

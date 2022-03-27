@@ -49,7 +49,10 @@ public class GameScene : BaseScene
             Managers.SaveLoad.LoadData();
             Managers.SaveLoad.Load = false;
         }
-        
+
+        SetWeapon();
+
+
         StartCoroutine(Managers.Skill.cooling());
 
         Managers.Sound.Play("Sounds/Bgm/FarmDay", Define.Sound.Bgm);
@@ -95,5 +98,17 @@ public class GameScene : BaseScene
         Camera.main.GetComponent<CameraController>().isStop = false;
 
         Managers.Quest.SetFirstQuest();
+    }
+
+    public void SetWeapon()
+    {
+        UI_Slot[] slots = Managers.Database._PlayerInfo.GetSlots();
+
+        if (slots[0].item == null)
+        {
+            slots[0].AddItem(Managers.Database.ItemDictionary[13]);
+        }
+
+        Managers.Database._PlayerInfo.SetEquipment();
     }
 }

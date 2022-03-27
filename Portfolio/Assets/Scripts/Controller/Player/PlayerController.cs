@@ -76,13 +76,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public float shortDis;
 
-    void Start()
+    private void Awake()
     {
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         _stat = gameObject.GetComponent<PlayerStat>();
         cam = Camera.main;
+    }
 
+    void Start()
+    {
         Init();
 
         PlayerWeapon.tag = "PLAYER_ATTACK";

@@ -99,11 +99,7 @@ public class UI_PlayerInfo : UI_Popup
 
         SetSkillSlot();
         Managers.SaveLoad.theInfo = this;
-    }
-
-    private void Start()
-    {
-        equipmentSlots[0].AddItem(Managers.Database.ItemDictionary[13]);
+        Managers.Database._PlayerInfo = this;
     }
 
     private void Update()
@@ -192,7 +188,7 @@ public class UI_PlayerInfo : UI_Popup
 
     int itemAddAttack;
     int itemAddDefence;
-    private void SetEquipment()
+    public void SetEquipment()
     {
         if (equipmentSlots[0].item == null)
         {

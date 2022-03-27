@@ -139,9 +139,9 @@ public class SaveLoadManager
                 theInven.LoadToInven(saveData.invenArrayNumber[i], saveData.invenItemCode[i], saveData.invenItemNumber[i]);
             }
 
-            for (int i=0;i<saveData.quickArrayNumber.Count; ++i)
+            for (int i = 0; i < saveData.quickArrayNumber.Count; ++i)
             {
-                theGameUI.LoadToQuick(saveData.quickItemNumber[i], saveData.quickItemCode[i], saveData.quickItemNumber[i]);
+                theGameUI.LoadToQuick(saveData.quickArrayNumber[i], saveData.quickItemCode[i], saveData.quickItemNumber[i]);
             }
 
             theInven.Money = saveData.money;
